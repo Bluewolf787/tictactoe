@@ -4,11 +4,11 @@
 
 void drawField(char fields[3][3]) {
     printf("    A   B   C\n");
-    printf("  ⎯⎯⎯⎯⎯⎯⎯⎯\n");
+    printf("  ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n");
     printf("1 │ %c │ %c │ %c │\n", fields[0][0], fields[0][1], fields[0][2]);
     printf("2 │ %c │ %c │ %c │\n", fields[1][0], fields[1][1], fields[1][2]);
     printf("3 │ %c │ %c │ %c │\n", fields[2][0], fields[2][1], fields[2][2]);
-    printf("  ⎯⎯⎯⎯⎯⎯⎯⎯\n");
+    printf("  ─────────────\n");
 }
 
 bool checkWin(char fields[3][3]) {
@@ -37,7 +37,7 @@ bool checkWin(char fields[3][3]) {
         return false;
 }
 
-int main() {
+void gameLoop() {
     char fields[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 
     drawField(fields);
@@ -52,31 +52,31 @@ int main() {
         printf("%c enter line and row: ", player);
         scanf("%s", field);
 
-        if (strcmp(field, "A1") == 0) {
+        if (strcmp(field, "A1") == 0 || strcmp(field, "1A") == 0) {
             fields[0][0] = player;
         }
-        else if (strcmp(field, "B1") == 0) {
+        else if (strcmp(field, "B1") == 0 || strcmp(field, "1B") == 0) {
             fields[0][1] = player;
         }
-        else if (strcmp(field, "C1") == 0) {
+        else if (strcmp(field, "C1") == 0 || strcmp(field, "1C") == 0) {
             fields[0][2] = player;
         }
-        else if (strcmp(field, "A2") == 0) {
+        else if (strcmp(field, "A2") == 0 || strcmp(field, "2A") == 0) {
             fields[1][0] = player;
         }
-        else if (strcmp(field, "B2") == 0) {
+        else if (strcmp(field, "B2") == 0 || strcmp(field, "2B") == 0) {
             fields[1][1] = player;
         }
-        else if (strcmp(field, "C2") == 0) {
+        else if (strcmp(field, "C2") == 0 || strcmp(field, "2C") == 0) {
             fields[1][2] = player;
         }
-        else if (strcmp(field, "A3") == 0) {
+        else if (strcmp(field, "A3") == 0 || strcmp(field, "3A") == 0) {
             fields[2][0] = player;
         }
-        else if (strcmp(field, "B3") == 0) {
+        else if (strcmp(field, "B3") == 0 || strcmp(field, "3B") == 0) {
             fields[2][1] = player;
         }
-        else if (strcmp(field, "C3") == 0) {
+        else if (strcmp(field, "C3") == 0 || strcmp(field, "3C") == 0) {
             fields[2][2] = player;
         }
 
@@ -88,6 +88,26 @@ int main() {
         }
 
         turn++;
+    }
+}
+
+int main() {
+    printf("████████╗██╗ ██████╗████████╗ █████╗  ██████╗████████╗ ██████╗ ███████╗\n");
+    printf("╚══██╔══╝██║██╔════╝╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔════╝\n");
+    printf("   ██║   ██║██║        ██║   ███████║██║        ██║   ██║   ██║█████╗  \n");
+    printf("   ██║   ██║██║        ██║   ██╔══██║██║        ██║   ██║   ██║██╔══╝  \n");
+    printf("   ██║   ██║╚██████╗   ██║   ██║  ██║╚██████╗   ██║   ╚██████╔╝███████╗\n");
+    printf("   ╚═╝   ╚═╝ ╚═════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚══════╝\n");
+    printf("\n");
+
+    while (1) {
+        gameLoop();
+
+        char answer[10];
+        printf("Do you want to play again? (y/n): ");
+        scanf("%s", answer);
+
+        if (strcmp(answer, "y") != 0) break;
     }
 
     return 0;
